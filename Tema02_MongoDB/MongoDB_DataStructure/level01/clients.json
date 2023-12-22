@@ -1,0 +1,65 @@
+{
+	"_id": {
+		"$oid": "658449b938f419ca7b0074e9"
+	},
+	"name": "First Client Name",
+	"address": {
+		"street": "Right Street",
+		"number": "123",
+		"city": "Barcelona",
+		"postal_code": "08123",
+		"country": "Spain",
+		"floor": "2n",
+		"door": "1st"
+	},
+	"email": "firstclientemail@fake.com",
+	"register_date": {
+		"$date": "2023-12-21T00:00:00Z"
+	},
+	"sells": [
+		{
+			"brand": "Rayban",
+			"graduation_left": 2.3,
+			"graduation_right": 2.0,
+			"color_left": "white",
+			"color_right": "white",
+			"frame_type": "Metallic",
+			"price": 127.0
+		}
+	]
+}
+{
+	"_id": {
+		"$oid": "65844c4a581871af149749d5"
+	},
+	"name": "First Client Name",
+	"address": {
+		"street": "Right Street",
+		"number": "123",
+		"city": "Barcelona",
+		"postal_code": "08123",
+		"country": "Spain",
+		"floor": "2n",
+		"door": "1st"
+	},
+	"email": "firstclientemail@fake.com",
+	"register_date": {
+		"$date": "2023-12-21T00:00:00Z"
+	},
+	"recomendation_id": null,
+	"sells": [
+		{
+			"brand": "Rayban",
+			"graduation_left": 2.3,
+			"graduation_right": 2.0,
+			"color_left": "white",
+			"color_right": "white",
+			"frame_type": "Metallic",
+			"price": 127.0,
+			"employer_id": 1.0,
+			"sale_date": {
+				"$date": "2023-12-22T00:00:00Z"
+			}
+		}
+	]
+}

@@ -1,0 +1,93 @@
+************************************************************************
+********************SPRINT 2 - THEORY NOTES ****************************
+************************************************************************
+
+**************************TOPICS****************************************
+
+- Thema 1: MySQL
+- Thema 2: MongoDB
+
+
+************************THEORY******************************************
+
+
+- Thema 1: MySQL
+	- MySQL Introduction and Workbench
+	- Database Conceptual Design
+	- Database Logical Design
+	- Database Physical Design
+	- Needed Software
+	- Entity Relationship Diagram Model
+	- Data Types MySQL
+	- SQL Examples
+	- Database Diagrams
+	
+	
+	
+- Thema 2: MongoDB
+	- 
+
+
+*************************** EXERCISES **********************************
+
+- Thema 1: MySQL
+	- MySQL Queries
+		- Level 1:
+		- Level 2:
+		- Level 3:
+		*Level achieved depending on exercise level 1 grade
+		(How many Queries Correct)
+		
+	- MySQL Datastructures
+		- Level 1:
+			- Exercise 1 - Optica
+			- Exercise 2 - Pizzeria
+			
+		- Level 2:
+			- Exercise 1 - Youtube
+			
+		- Level 3:
+			- Exercise 1 - Spotify
+	
+- Thema 2: MongoDB
+	- MongoDB - Queries
+			- Level 1:
+			- Level 2:
+			- Level 3:
+			*Level achieved depending on exercise level 1 grade
+			(How many Queries Correct)
+	- MongoDB - Data Structure
+		- Level 1:
+			- Exercise 1 - Optica
+			- Exercise 2 - Pizzeria
+			
+		- Level 2:
+			- Exercise 1 - Youtube
+			
+		- Level 3:
+			- Exercise 1 - Spotify
+	
+
+
+***************************SOURCES**************************************
+
+
+***************************MY SOURCES***********************************
+
+
+
+
+
+***************************MySQL***********************************
+
+- Setup:
+	https://packages.debian.org/search?keywords=default-mysql-server
+	https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/
+	
+	Add Unstable/SID Repository
+	
+	apt-get install mysql-workbench-community
+	apt-get install mysql-server
+	
+
+

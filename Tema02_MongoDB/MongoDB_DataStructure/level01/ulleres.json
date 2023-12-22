@@ -1,0 +1,16 @@
+{
+	"_id": {
+		"$oid": "65844c4a581871af149749d7"
+	},
+	"brand": "Brand",
+	"frame": "Metallic",
+	"provider": "Google Associated SL",
+	"price": 105.75,
+	"proveidor_id": [
+		1.0
+	],
+	"buyers_id": [
+		1.0,
+		2.0
+	]
+}

@@ -1,0 +1,18 @@
+{
+	"_id": {
+		"$oid": "65844c4a581871af149749d6"
+	},
+	"name": "proveidorU",
+	"address": {
+		"street": "Right Street",
+		"number": "123",
+		"city": "Barcelona",
+		"postal_code": "08123",
+		"country": "Spain",
+		"floor": "2n",
+		"door": "1st"
+	},
+	"telephone": "912398123",
+	"fax": "192873917",
+	"nif": "ijadsidlma"
+}

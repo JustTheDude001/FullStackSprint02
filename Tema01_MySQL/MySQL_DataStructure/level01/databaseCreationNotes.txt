@@ -1,0 +1,13 @@
+***************** DATABASE CREATION NOTES ******************************
+
+************************WARNINGS ***************************************
+- It is NOT Possible to create a database using DBeaver
+
+******************* MYSQL DATABASE CREATION ****************************
+
+- COMMANDS:
+	CREATE DATABASE optica;
+	
+********************** PROCEDURE ***************************************
+
+1. Create MySQL Database Using MySQL Command Line.

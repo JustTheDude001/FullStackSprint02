@@ -1,0 +1,4 @@
+*********** TODO QUERIES ********************
+
+- query nunmber 15 is Missing Right
+- Query Universidad number 7 first pack

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="MongoDb" id="Project-44f" database="MongoDb" >
+	<schema name="optica" >
+		<table name="clients" virtual="y" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="address" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="street" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="number" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="city" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="postal_code" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="country" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="floor" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="door" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="email" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="register_date" type="date" length="800" decimal="0" jt="91" mandatory="y" />
+			<column name="sells" type="array[object]" length="800" decimal="0" jt="4999545" mandatory="y" >
+				<column name="brand" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="graduation_left" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+				<column name="graduation_right" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+				<column name="color_left" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="color_right" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="frame_type" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="price" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+				<column name="employer_id" type="double" length="800" decimal="0" jt="8" />
+				<column name="sale_date" type="date" length="800" decimal="0" jt="91" />
+			</column>
+			<column name="recomendation_id" type="string" length="800" decimal="0" jt="12" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="proveiders" virtual="y" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="name" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="address" type="object" length="800" decimal="0" jt="4999544" mandatory="y" >
+				<column name="street" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="number" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="city" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="postal_code" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="country" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="floor" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+				<column name="door" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			</column>
+			<column name="telephone" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="fax" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="nif" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+		<table name="ulleres" virtual="y" >
+			<column name="_id" type="objectId" length="800" decimal="0" jt="-8" mandatory="y" />
+			<column name="brand" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="frame" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="provider" type="string" length="800" decimal="0" jt="12" mandatory="y" />
+			<column name="price" type="double" length="800" decimal="0" jt="8" mandatory="y" />
+			<column name="proveidor_id" type="array[double]" length="800" decimal="0" jt="2003" mandatory="y" />
+			<column name="buyers_id" type="array[double]" length="800" decimal="0" jt="2003" mandatory="y" />
+			<index name="_id_" unique="PRIMARY_KEY" >
+				<column name="_id" />
+			</index>
+		</table>
+	</schema>
+	<layout name="Main Layout" id="Layout-1b43" show_relation="name" >
+		<entity schema="optica" name="clients" column="address" color="BED3F4" x="51" y="323" />
+		<entity schema="optica" name="proveiders" column="address" color="C7F4BE" x="442" y="306" />
+		<entity schema="optica" name="clients" color="BED3F4" x="119" y="119" />
+		<entity schema="optica" name="proveiders" color="C7F4BE" x="442" y="119" />
+		<entity schema="optica" name="clients" column="sells" color="BED3F4" x="221" y="323" />
+		<entity schema="optica" name="ulleres" color="3986C1" x="629" y="85" />
+		<group name="Collection &#039;proveiders&#039;" color="EEF7EC" >
+			<entity schema="optica" name="proveiders" />
+			<entity schema="optica" name="proveiders" column="address" />
+		</group>
+		<group name="Collection &#039;clients&#039;" color="ECF0F7" >
+			<entity schema="optica" name="clients" />
+			<entity schema="optica" name="clients" column="address" />
+			<entity schema="optica" name="clients" column="sells" />
+		</group>
+	</layout>
+	<layout name="~Layout with Sample Tools" id="Layout-616" show_column_type="y" show_relation="name" >
+		<entity schema="optica" name="clients" column="address" color="BED3F4" x="51" y="323" />
+		<entity schema="optica" name="proveiders" column="address" color="C7F4BE" x="561" y="306" />
+		<entity schema="optica" name="clients" color="BED3F4" x="136" y="119" />
+		<entity schema="optica" name="proveiders" color="C7F4BE" x="561" y="119" />
+		<entity schema="optica" name="clients" column="sells" color="BED3F4" x="238" y="323" />
+		<entity schema="optica" name="ulleres" color="3986C1" x="782" y="85" />
+		<group name="proveiders" color="EEF7EC" >
+			<entity schema="optica" name="proveiders" />
+			<entity schema="optica" name="proveiders" column="address" />
+		</group>
+		<group name="clients" color="ECF0F7" >
+			<entity schema="optica" name="clients" />
+			<entity schema="optica" name="clients" column="address" />
+			<entity schema="optica" name="clients" column="sells" />
+		</group>
+		<script name="Query Editor" id="Editor-19ce" language="SQL" >
+			<string><![CDATA[optica.clients.find()
+
+//OR
+
+USE optica;
+db.clients.find()
+
+//OR
+
+USE optica;
+db.getCollection('clients').find()]]></string>
+		</script>
+		<browser id="Browse-27d" name="Relational Data Explorer" confirm_updates="y" >
+			<browse_table schema="optica" entity="clients" x="-2147483648" y="-2147483648" width="-2147483648" height="-2147483648" record_view="y" />
+		</browser>
+		<query id="Query-ad1" name="Query Builder" >
+			<query_table schema="optica" name="clients" alias="clients" x="51" y="51" >
+				<column name="_id" />
+				<column name="name" />
+				<column name="address" />
+				<column name="email" />
+				<column name="register_date" />
+				<column name="sells" />
+				<column name="recomendation_id" />
+			</query_table>
+		</query>
+		<form name="Report" id="Report-1ee" template="Page" css="container-fluid" view="frame" >
+			<var name="samplePageNumber" type="4" value="0" mandatory="n" />
+			<var name="sampleRecordsPerPage" type="4" value="100" mandatory="n" />
+			<body name="Body" template="Grid" max_records="100" pos="0,0,0,0,f,f" layout="{{-2,-2,-2,-2,-1},{-2,-2,-2,-2}}" scroll="n" html="n" >
+				<cell type="label" name="Clients Data" template="H3" pos="0,0,1,0,l,c" />
+				<cell type="chart" name="Pie" template="Pie" pos="0,1,4,1,l,c" max_records="20" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="_id" type="-8" />
+						<var name="name" />
+						<var name="address" type="4999544" />
+						<var name="email" />
+						<var name="register_date" type="91" />
+						<var name="sells" type="4999545" />
+						<var name="recomendation_id" />
+						<script ><![CDATA[optica.clients.find()]]></script>
+					</form_script>
+					<param name="item" value="email" />
+					<param name="width" value="100%" />
+					<param name="title" value="Sample Chart" />
+					<param name="height" value="400px" />
+				</cell>
+				<tableview name="sample" template="Table" max_records="100" css="sortable table table-striped table-sm table-hover" pos="0,2,4,2,f,f" layout="{{-2,-2,-2,-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="_id" type="-8" />
+						<var name="name" />
+						<var name="address" type="4999544" />
+						<var name="email" />
+						<var name="register_date" type="91" />
+						<var name="sells" type="4999545" />
+						<var name="recomendation_id" />
+						<script ><![CDATA[optica.clients.find()]]></script>
+					</form_script>
+					<cell type="label" name="_id" pos="0,0,0,0,c,c" />
+					<cell type="label" name="name" pos="1,0,1,0,c,c" />
+					<cell type="label" name="address" pos="2,0,2,0,c,c" />
+					<cell type="label" name="email" pos="3,0,3,0,c,c" />
+					<cell type="label" name="register_date" pos="4,0,4,0,c,c" />
+					<cell type="label" name="sells" pos="5,0,5,0,c,c" />
+					<cell type="label" name="recomendation_id" pos="6,0,6,0,c,c" />
+					<cell type="label" name="${_id}" template="Plain" pos="0,1,0,1,l,c" />
+					<cell type="label" name="${name}" template="Plain" pos="1,1,1,1,l,c" />
+					<cell type="label" name="${address}" template="Plain" pos="2,1,2,1,l,c" />
+					<cell type="label" name="${email}" template="Plain" pos="3,1,3,1,l,c" />
+					<cell type="label" name="${register_date}" template="Plain" pos="4,1,4,1,l,c" />
+					<cell type="label" name="${sells}" template="Plain" pos="5,1,5,1,l,c" />
+					<cell type="label" name="${recomendation_id}" template="Plain" pos="6,1,6,1,l,c" />
+					<cell type="button" name="More" template="Plain" css="btn btn-sm btn-secondary" pos="7,1,7,1,c,c" ref_id="Report-1ee" />
+				</tableview>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="0,3,0,3,l,c" glyph="bi-chevron_double_left" ref_id="Report-1ee" >
+					<var name="samplePageNumber" value="0" />
+				</cell>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="1,3,1,3,l,c" glyph="bi-chevron_left" ref_id="Report-1ee" >
+					<var name="samplePageNumber" value="${Math.max(0,samplePageNumber-1)}" />
+				</cell>
+				<cell type="label" name="Page ${samplePageNumber+1}" pos="2,3,2,3,l,c" />
+				<cell type="href" name="" disabled="${!sampleHasNextPage}" pos="3,3,3,3,l,c" glyph="bi-chevron_right" ref_id="Report-1ee" >
+					<var name="samplePageNumber" value="${( samplePageNumber+1 )}" />
+				</cell>
+			</body>
+		</form>
+	</layout>
+</project>
