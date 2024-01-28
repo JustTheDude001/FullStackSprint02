@@ -38,6 +38,10 @@ db.clients.insert({
 	recomendation_id: null,
 	sells: [
 		{
+		ulleres: [
+			{ulleres_id: 1,
+			proveider_id: 2}
+		],
 		brand: "Rayban",
 		graduation_left: 2.3,
 		graduation_right: 2.0,

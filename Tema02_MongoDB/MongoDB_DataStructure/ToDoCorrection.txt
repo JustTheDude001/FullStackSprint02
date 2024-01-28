@@ -1,0 +1,58 @@
+************************************************************************
+************ CORRECTION MONGO DB STRUCTURE *****************************
+************************************************************************
+
+
+
+****************** TEACHER CORRECTION **********************************
+
+Hola,Mario!
+
+En el nivel 1,cada ejercicio debes entregarme el modelo completo de datos. 
+Es decir, me has entregado las partes visibles del ejercicio 1 y 2, de 
+manera correcta por cierto, pero has obviado los datos que no se ven pero 
+que igualmente deberían estar presentes. Completa eso y ya lo tienes :)
+
+Sobre el nivel 2:
+
+    Ojo que duplicas product_id en el array de products en la colección Orders.
+    Igual cierta información del cliente debería estar más a mano en la colección Orders.
+    Estamos orientando la vista a los pedidos, en ellos ya se referenciará al cliente. 
+    Por tanto, no sería preciso indicar de nuevo los pedidos en Cliente.
+
+Sobre el nivel 3:
+
+    Falta información solicitada en el modelo!
+
+Saludos!
+
+
+************************* MY  NOTES ************************************
+- Level 1:
+	- Separate ex 1 and ex 2 of level 1
+	!!!
+	- Differences:
+		- Ex 1:
+		
+		- Ex 2:
+		
+	- Sells
+		- Add ulleres array:
+			- Add ulleres_id
+			- Add proveider_id
+	
+	
+- Level 2:
+	- Product_id duplicated in products (Writing Error) Done
+	- Add in order information about client:
+		- Name and surname (At least) (Inlcuded) Done
+	
+	- orders_id not needed in client! Done
+
+- Level 3: 
+	- Missing Information!!!
+		
+	- Add playlist ids in video Done
+	- This is all the missing information I found ''
+	- Add replies to comments: Done
+	

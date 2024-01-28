@@ -12,7 +12,6 @@ db.clients.insert({
 		province: "Barcelona"
 	},
 	phone_number: "123719231",
-	orders_ids: [1]
 })
 
 db.orders.insert({
@@ -20,7 +19,7 @@ db.orders.insert({
 	date: new Date(2023-12-21),
 	type: "domicili",
 	products: [
-		{porduct_id: 1,
+		{product_id: 1,
 		product_name: "Pizza Margaritha",
 		product_amount: 2}
 		,
@@ -32,7 +31,12 @@ db.orders.insert({
 	info: "No more info",
 	shop_id: 1,
 	deliver_id: 1,
-	client_id: 1,
+	clients:[
+		{ client_id: 1,
+		client_name: "Dude",
+		client_surname_1: "Edud",
+		client_surname_2: "Dedu" }
+	],
 	deliver_time: ISODate("2023-12-21T20:32:00.00Z")
 })
 

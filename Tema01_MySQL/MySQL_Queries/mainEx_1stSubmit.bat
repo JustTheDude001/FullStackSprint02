@@ -44,12 +44,9 @@ select nombre, truncate(precio,0) from producto;
 
 
 -- 11--     Llista el codi dels fabricants que tenen productes en la taula "producto".
--- select codigo FROM fabricante where codigo  in (SELECT codigo_fabricante FROM producto);
-select f.codigo FROM fabricante f INNER JOIN producto  p ON f.codigo = p.codigo_fabricante;
-
+select codigo FROM fabricante where codigo  in (SELECT codigo_fabricante FROM producto);
 -- 12--     Llista el codi dels fabricants que tenen productes en la taula "producto", eliminant els codis que apareixen repetits.
--- select codigo FROM fabricante where codigo  in (SELECT DISTINCT codigo_fabricante FROM producto);
-select DISTINCT f.codigo FROM fabricante f INNER JOIN producto  p ON f.codigo = p.codigo_fabricante;
+select codigo FROM fabricante where codigo  in (SELECT DISTINCT codigo_fabricante FROM producto);
 -- 13--     Llista els noms dels fabricants ordenats de manera ascendent.
 select nombre from fabricante order by nombre asc;
 -- 14--     Llista els noms dels fabricants ordenats de manera descendent.
@@ -91,12 +88,9 @@ SELECT producto.nombre from producto WHERE producto.codigo_fabricante =( SELECT 
 -- 27--     Retorna una llista de tots els productes del fabricant Crucial que tinguin un preu major que 200 €.
 SELECT producto.nombre from producto WHERE producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Crucial') AND producto.precio > 200; 
 -- 28--     Retorna una llista amb tots els productes dels fabricants Asus, Hewlett-Packard i Seagate. Sense utilitzar l'operador IN.
--- SELECT producto.nombre from producto WHERE (producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Crucial') 
--- OR  (producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Hewlett-Packard')) 
--- OR (producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Seagate'))); 
-SELECT producto.nombre from producto INNER JOIN fabricante ON producto.codigo_fabricante = (SELECT fabricante.codigo WHERE fabricante.nombre = 'Crucial' OR fabricante.nombre = 'Hewlett-Packard' OR fabricante.nombre = 'Seagate');
-
-
+SELECT producto.nombre from producto WHERE (producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Crucial') 
+OR  (producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Hewlett-Packard')) 
+OR (producto.codigo_fabricante =( SELECT fabricante.codigo from fabricante WHERE fabricante.nombre = 'Seagate'))); 
 
 -- 29--     Retorna un llistat amb tots els productes dels fabricants Asus, Hewlett-Packard i Seagate. Usant l'operador IN.
 SELECT producto.nombre from producto WHERE 
@@ -143,10 +137,20 @@ AND producto.precio = (SELECT MIN(producto.precio) FROM producto WHERE (producto
 SELECT producto.nombre FROM producto WHERE producto.precio >= (SELECT MAX(producto.precio) FROM producto WHERE (producto.codigo_fabricante = (SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Lenovo") ));
 
 -- 41--     Llesta tots els productes del fabricant Asus que tenen un preu superior al preu mitjà de tots els seus productes.
--- My new answer for the question 41... Thank you for the help! AVG was really helpfull... not easy but I think it is correct ^^
-SELECT producto.nombre FROM producto WHERE producto.codigo_fabricante =  (SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus") 
-AND producto.precio > ( SELECT AVG(producto.precio) FROM producto WHERE producto.codigo_fabricante =  (SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus"));
-
+-- SELECT producto.nombre FROM producto WHERE producto.codigo_fabricante =  (SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus")
+-- AND producto.precio > MEDIAN(SELECT producto.precio FROM producto WHERE producto.codigo_fabricante =  (SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus"));
+-- Okay... no Median Function.... WHAT THE DEEP HELL!!
+-- My answer for question 41 below:
+SELECT producto.nombre FROM producto WHERE 
+(producto.codigo_fabricante =  (SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus"))
+AND 
+(producto.precio > 
+(SELECT SUM(producto.precio) FROM producto WHERE producto.codigo_fabricante =  
+	(SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus"))
+/
+(SELECT COUNT(producto.precio) FROM producto WHERE producto.codigo_fabricante =  
+	(SELECT fabricante.codigo FROM fabricante WHERE fabricante.nombre = "Asus"))
+);
 
 
 
@@ -155,25 +159,16 @@ AND producto.precio > ( SELECT AVG(producto.precio) FROM producto WHERE producto
 use universidad;
 -- Si us plau, descàrrega la base de dades del fitxer schema_universidad.sql, visualitza el diagrama E-R en un editor i efectua les següents consultes:
 -- 1--    Retorna un llistat amb el primer cognom, segon cognom i el nom de tots els/les alumnes. El llistat haurà d'estar ordenat alfabèticament de menor a major pel primer cognom, segon cognom i nom.
--- SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE persona.id IN (SELECT alumno_se_matricula_asignatura.id_alumno FROM alumno_se_matricula_asignatura) ORDER BY persona.apellido1, persona.apellido2, persona.nombre;
-SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE persona.tipo = 'alumno' ORDER BY persona.apellido1, persona.apellido2, persona.nombre;
+SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE persona.id IN (SELECT alumno_se_matricula_asignatura.id_alumno FROM alumno_se_matricula_asignatura) ORDER BY persona.apellido1, persona.apellido2, persona.nombre;
 -- 2--    Esbrina el nom i els dos cognoms dels/les alumnes que no han donat d'alta el seu número de telèfon en la base de dades.
--- SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE (persona.telefono IS NULL ) AND (persona.id IN (SELECT alumno_se_matricula_asignatura.id_alumno FROM alumno_se_matricula_asignatura));
-SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE (persona.telefono IS NULL ) AND (persona.tipo = 'alumno');
+SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE (persona.telefono IS NULL ) AND (persona.id IN (SELECT alumno_se_matricula_asignatura.id_alumno FROM alumno_se_matricula_asignatura));
 -- 3--    Retorna el llistat dels/les alumnes que van néixer en 1999.
--- SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE EXTRACT(YEAR FROM persona.fecha_nacimiento) = EXTRACT(YEAR FROM '1999-01-01') AND (persona.id IN (SELECT alumno_se_matricula_asignatura.id_alumno FROM alumno_se_matricula_asignatura));
 SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE EXTRACT(YEAR FROM persona.fecha_nacimiento) = EXTRACT(YEAR FROM '1999-01-01')
-AND (persona.tipo = 'alumno');
-
+AND (persona.id IN (SELECT alumno_se_matricula_asignatura.id_alumno FROM alumno_se_matricula_asignatura));
 -- 4--    Retorna el llistat de professors/es que no han donat d'alta el seu número de telèfon en la base de dades i a més el seu NIF acaba en K.
--- SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE (persona.telefono IS NULL )
--- AND right(persona.nif,1) = 'K'
--- AND persona.id IN (SELECT profesor.id_profesor FROM profesor);
-
 SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona WHERE (persona.telefono IS NULL )
 AND right(persona.nif,1) = 'K'
-AND persona.tipo = 'profesor';
-
+AND persona.id IN (SELECT profesor.id_profesor FROM profesor);
 -- 5--    Retorna el llistat de les assignatures que s'imparteixen en el primer quadrimestre, en el tercer curs del grau que té l'identificador 7.
 SELECT asignatura.nombre FROM asignatura WHERE
 asignatura.cuatrimestre = 1
@@ -231,30 +226,34 @@ SELECT departamento.nombre FROM departamento WHERE departamento.id IN
 
 -- Resol les 6 següents consultes utilitzant les clàusules LEFT JOIN i RIGHT JOIN.
 
--- 1--     Retorna un llistat amb els noms de tots els professors/es i els departaments que tenen vinculats/des. El llistat també ha de mostrar aquells professors/es que no tenen cap departament associat. 
--- El llistat ha de retornar quatre columnes, nom del departament, primer cognom, segon cognom i nom del professor/a. El resultat estarà ordenat alfabèticament de menor a major pel nom del departament, cognoms i el nom.
+-- 1--     Retorna un llistat amb els noms de tots els professors/es i els departaments que tenen vinculats/des. El llistat també ha de mostrar aquells professors/es que no tenen cap departament associat. El llistat ha de retornar quatre columnes, nom del departament, primer cognom, segon cognom i nom del professor/a. El resultat estarà ordenat alfabèticament de menor a major pel nom del departament, cognoms i el nom.
 -- SELECT persona.nombre FROM persona WHERE persona.id IN (SELECT profesor.id_profesor FROM profesor);
 -- SELECT departamento.nombre FROM departamento;
 -- Above to test... (QUERY NUMBER 1 BELOW)
--- SELECT departamento.nombre, persona.apellido1, persona.apellido2, persona.nombre FROM persona 
--- RIGHT JOIN departamento ON
--- departamento.id = (SELECT profesor.id_departamento FROM profesor 
--- WHERE profesor.id_profesor = persona.id)
--- ORDER BY departamento.nombre ASC, persona.apellido1 ASC, persona.apellido2 ASC, persona.nombre ASC;
-
 SELECT departamento.nombre, persona.apellido1, persona.apellido2, persona.nombre FROM persona 
-LEFT JOIN departamento ON
+RIGHT JOIN departamento ON
 departamento.id = (SELECT profesor.id_departamento FROM profesor 
 WHERE profesor.id_profesor = persona.id)
 ORDER BY departamento.nombre ASC, persona.apellido1 ASC, persona.apellido2 ASC, persona.nombre ASC;
 
 -- 2--     Retorna un llistat amb els professors/es que no estan associats a un departament.
+/*In order to test:*/
+/*
 SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona
 RIGHT JOIN profesor ON
 profesor.id_profesor = persona.id
-WHERE persona.tipo = 'profesor' 
-AND persona.id NOT IN (SELECT profesor.id_profesor FROM profesor);
-
+WHERE profesor.id_departamento = 1;
+*/
+/*My answer for Query 2:*/
+SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona
+RIGHT JOIN profesor ON
+profesor.id_profesor = persona.id
+WHERE profesor.id_departamento = NULL;
+-- OR:
+SELECT persona.apellido1, persona.apellido2, persona.nombre FROM persona
+RIGHT JOIN profesor ON
+profesor.id_profesor = persona.id
+WHERE profesor.id_departamento = 0;
 
 -- 3--     Retorna un llistat amb els departaments que no tenen professors/es associats.
 SELECT departamento.nombre FROM departamento
@@ -266,9 +265,16 @@ WHERE departamento.id NOT IN (SELECT profesor.id_departamento FROM profesor);
 SELECT persona.nombre FROM persona
 LEFT JOIN profesor ON
 profesor.id_profesor = persona.id
-WHERE profesor.id_profesor NOT IN (SELECT asignatura.id_profesor FROM asignatura)
-OR persona.id NOT IN (SELECT profesor.id_profesor);
+WHERE profesor.id_profesor NOT IN (SELECT asignatura.id_profesor FROM asignatura
+ WHERE asignatura.id_profesor IS NOT NULL);
 
+/* FOR THE FUTURE, FINISH IT THIS WAY IF POSSIBLE (NOT ANSWER FOR CORRECTION / ANSWER FOR QUERY 4 ABOVE)
+SELECT persona.nombre FROM persona
+LEFT JOIN profesor ON
+profesor.id_profesor = persona.id
+WHERE profesor.id_profesor IN (SELECT profesor.id_profesor 
+FROM profesor WHERE profesor.id_profesor NOT IN (SELECT asignatura.id_profesor FROM asignatura));
+*/
 
 
 -- 5--     Retorna un llistat amb les assignatures que no tenen un professor/a assignat.
@@ -297,10 +303,9 @@ FROM profesor WHERE profesor.id_departamento IS NOT NULL);
 
 -- 1--     Retorna el nombre total d'alumnes que hi ha.
 -- Consideració alumne = persona que no es professor:
--- SELECT COUNT(persona.id) FROM persona WHERE persona.id NOT IN (SELECT profesor.id_profesor FROM profesor);
+SELECT COUNT(persona.id) FROM persona WHERE persona.id NOT IN (SELECT profesor.id_profesor FROM profesor);
 -- Consideració alumne = persona que s'ha matriculat a assignatura:
--- SELECT COUNT(DISTINCT(alumno_se_matricula_asignatura.id_alumno)) FROM alumno_se_matricula_asignatura;
-SELECT COUNT(persona.id) FROM persona WHERE persona.tipo = 'alumno';
+SELECT COUNT(DISTINCT(alumno_se_matricula_asignatura.id_alumno)) FROM alumno_se_matricula_asignatura;
 
 -- 2--     Calcula quants/es alumnes van néixer en 1999.
 -- Consideració alumne = persona que no es professor:
@@ -405,14 +410,6 @@ LEFT JOIN alumno_se_matricula_asignatura ON
 alumno_se_matricula_asignatura.id_curso_escolar = curso_escolar.id
 WHERE curso_escolar.id = alumno_se_matricula_asignatura.id_curso_escolar
 GROUP BY curso_escolar.anyo_inicio;
--- Correction below: (I do not know if that is what I needed to do... Apologies if incorrect)
-SELECT curso_escolar.anyo_inicio, COUNT(alumno_se_matricula_asignatura.id_alumno) FROM curso_escolar
-LEFT JOIN alumno_se_matricula_asignatura ON
-alumno_se_matricula_asignatura.id_curso_escolar = curso_escolar.id
-GROUP BY curso_escolar.anyo_inicio;
-
-
-
 
 -- 9--     Retorna un llistat amb el nombre d'assignatures que imparteix cada professor/a. El llistat ha de tenir en compte aquells professors/es que no imparteixen cap assignatura. El resultat mostrarà cinc columnes: id, nom, primer cognom, segon cognom i nombre d'assignatures. El resultat estarà ordenat de major a menor pel nombre d'assignatures.
 SELECT persona.id, persona.nombre, persona.apellido1, persona.apellido2, COUNT(asignatura.id_profesor) FROM persona
@@ -428,15 +425,11 @@ SELECT * FROM persona
 WHERE persona.fecha_nacimiento = (SELECT MIN(fecha_nacimiento) FROM persona WHERE persona.tipo = "alumno")
 AND persona.tipo = "alumno";
 -- ASK THEACHER...
-/* Ara em dono compte que hi ha una columna a la taula persona que indica si algu es alumne o profesor ^^'...
+/* Ara em dono compte que hi ha una columna a la taula persona que indica si algu es alumne o profeso ^^'...
 NO ho he utilitzat a cap exercici... tot i que els resultats haurien de ser coherents... Simplement per
 veure si algu es alumne o profesor comprobo si el seu ID esta en la taula profesor... 
 Si les dades contingudes a la base de dades son coherents hauria de ser el mateix resultat...
 Si es necessari que ho canvii cap problema, de moment deixo les antigues queries com estan*/
--- Correction number 10:
-SELECT * FROM persona
-WHERE persona.fecha_nacimiento = (SELECT MIN(fecha_nacimiento) FROM persona WHERE persona.tipo = "alumno");
-
 
 
 -- 11--     Retorna un llistat amb els professors/es que tenen un departament associat i que no imparteixen cap assignatura.

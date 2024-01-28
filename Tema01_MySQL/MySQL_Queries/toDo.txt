@@ -1,4 +1,30 @@
-*********** TODO QUERIES ********************
+*********** CORRECTION QUERIES ********
+-- Tienda:
+- Query num 11 corrected
+- Query num 12 corrected
 
-- query nunmber 15 is Missing Right
-- Query Universidad number 7 first pack
+- Query num 28 corrected
+- Query num 41 corrected
+
+
+-- Universidad
+- To Correct:
+- 1,2 and 3 [Corrected]
+- 6 (Not sure)
+
+- Universidad Checked again:
+
+- 4 -> With persona.tipo (Changed)
+
+- Resum:
+- To Correct:
+- 1, 8, 10
+- 1 [Corrected]
+- 8 [Corrected - Ask Teacher]
+- 10 [Corrected - Ask teacher]
+
+
+
+-- Left Right
+- To Correct
+- 1, 2 and 4 [Corrected]

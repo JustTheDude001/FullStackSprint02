@@ -30,13 +30,16 @@ db.videos.insert({
  comments: [
 	{
 	comment_id: 1,
+	reply_to_comment_id: 0,
 	text: "comment 1 text",
 	date: ISODate("2023-12-21T20:32:00.00Z")
 	},{
 	comment_id: 2,
+	reply_to_comment_id: 1,
 	text: "comment 2 text",
 	date: ISODate("2023-12-21T20:32:00.00Z")
 	},{comment_id: 3,
+	reply_to_comment_id: 0,
 	text: "comment 3 text",
 	date: ISODate("2023-12-21T20:32:00.00Z")
 	}
@@ -45,7 +48,8 @@ db.videos.insert({
 	{type: "like", user_id: 1, date: ISODate("2023-12-21T20:32:00.00Z")},
 	{type: "dislike", user_id: 2, date: ISODate("2023-12-21T20:32:00.00Z")},
 	{type: "like", user_id: 3, date: ISODate("2023-12-21T20:32:00.00Z")}
- ]
+ ],
+ playlists_ids:[1,2,5]
 })
 
 
