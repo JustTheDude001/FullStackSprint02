@@ -21,16 +21,25 @@ db.orders.insert({
 	products: [
 		{product_id: 1,
 		product_name: "Pizza Margaritha",
-		product_amount: 2}
+		product_amount: 2,
+		price_total: 100}
 		,
 		{product_id: 2,
 		product_name: "Cola",
-		product_amount: 2}
+		product_amount: 2,
+		price_total: 100}
 	],
 	total_price: 34.75,
 	info: "No more info",
 	shop_id: 1,
-	deliver_id: 1,
+	deliver_info: 
+	{
+		street: "FakeStreet",
+		number: "777",
+		flor: "3rd",
+		contact_number: "9182313",
+		note: "We do not have elevator"
+	},
 	clients:[
 		{ client_id: 1,
 		client_name: "Dude",
